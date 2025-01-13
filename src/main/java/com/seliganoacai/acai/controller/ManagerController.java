@@ -1,9 +1,9 @@
 package com.seliganoacai.acai.controller;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.entity.dto.ManagerCreateDto;
-import com.seliganoacai.acai.entity.dto.ManagerResponseDto;
-import com.seliganoacai.acai.modelMapper.ManagerMapper;
+import com.seliganoacai.acai.webConfig.dto.ManagerCreateDto;
+import com.seliganoacai.acai.webConfig.dto.ManagerResponseDto;
+import com.seliganoacai.acai.webConfig.modelMapper.ManagerMapper;
 import com.seliganoacai.acai.service.ManagerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

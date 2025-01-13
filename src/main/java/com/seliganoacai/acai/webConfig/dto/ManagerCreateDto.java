@@ -1,4 +1,4 @@
-package com.seliganoacai.acai.entity.dto;
+package com.seliganoacai.acai.webConfig.dto;
 
 
 import jakarta.validation.constraints.NotBlank;

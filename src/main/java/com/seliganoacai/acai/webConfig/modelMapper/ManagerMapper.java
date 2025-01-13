@@ -1,8 +1,8 @@
-package com.seliganoacai.acai.modelMapper;
+package com.seliganoacai.acai.webConfig.modelMapper;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.entity.dto.ManagerCreateDto;
-import com.seliganoacai.acai.entity.dto.ManagerResponseDto;
+import com.seliganoacai.acai.webConfig.dto.ManagerCreateDto;
+import com.seliganoacai.acai.webConfig.dto.ManagerResponseDto;
 
 public class ManagerMapper {
 
