@@ -32,7 +32,7 @@ public class Manager implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.CLIENTE;
+    private Role role = Role.ADMIN;
 
     @Override
     public boolean equals(Object o) {
