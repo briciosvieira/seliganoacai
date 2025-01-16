@@ -2,6 +2,7 @@ package com.seliganoacai.acai.service;
 
 import com.seliganoacai.acai.entity.Manager;
 import com.seliganoacai.acai.repository.ManagerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class ManagerService {
     @Transactional
     public Manager save(Manager manager) {
         return repository.save(manager);
+    }
+
+    public Manager findByUsername(String username) {
+        return repository.findByUsername(username).orElseThrow(()-> new EntityNotFoundException(String.format("Usuário não encontrado")));
     }
 }

@@ -14,7 +14,7 @@ package com.seliganoacai.acai.JWT;
  import java.time.ZoneId;
  import java.util.Date;
 
-@Slf4j
+
 public class JwtUtils {
 
     public static final String BEARER =  "Beare ";
@@ -72,7 +72,7 @@ public class JwtUtils {
                     .setSigningKey(generateKey()).build()
                     .parseClaimsJws(removePrefixBearer(token)).getBody();
         } catch (JwtException e) {
-            log.error(String.format("Token invalido, gentileza verificar", e.getMessage()));
+            System.out.println("Corrigir, Usuario não encontrado");
         }
         return null;
     }
@@ -85,8 +85,7 @@ public class JwtUtils {
                     .parseClaimsJws(removePrefixBearer(token));
             return true;
         }catch (JwtException e){
-
-            log.error(String.format("O token não é válido", e.getMessage()));
+            System.out.println("Corrigir, Token autenticação invalido");
         }
         return false;
     }
