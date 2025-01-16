@@ -27,7 +27,7 @@ public class Manager implements Serializable {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

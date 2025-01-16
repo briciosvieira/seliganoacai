@@ -17,7 +17,7 @@ package com.seliganoacai.acai.JWT;
 
 public class JwtUtils {
 
-    public static final String BEARER =  "Beare ";
+    public static final String BEARER =  "Bearer ";
     public static final String KEY =  "tlAum)J^F`V^HA421c0l=kqq3aR/O+0wn*nU;C";
     public static final String AUTHORIZATION =  "AUTHORIZATION";
     public static final long day =  0;
@@ -42,7 +42,7 @@ public class JwtUtils {
         return Date.from(expireTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-
+    //metodo de criação do token
     public static JwtToken createJwtToken(String username, String role){
 
         Date issuiAt = new Date();
@@ -58,6 +58,8 @@ public class JwtUtils {
         return new JwtToken();
     }
 
+
+    //remove o valor que tem na variavel BEARER
     public static String removePrefixBearer(String token){
         if (token.contains(BEARER)){
             return token.substring(BEARER.length());
@@ -65,6 +67,7 @@ public class JwtUtils {
         return token;
     }
 
+    //pega os dados que estão no cabeçalho, ou seja, no Cliams
     public static Claims getCliamsFromToken(String token){
 
         try {

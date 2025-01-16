@@ -1,6 +1,7 @@
 package com.seliganoacai.acai.JWT;
 
 import com.seliganoacai.acai.entity.Manager;
+import com.seliganoacai.acai.entity.Role;
 import com.seliganoacai.acai.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,5 +19,10 @@ public class JwtUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Manager manager = service.findByUsername(username);
         return new JwtUserDetais(manager);
+    }
+
+    public JwtToken getTokenAutenticated(String username) {
+        Role role = service.findRoleByUsername(username);
+        return JwtUtils.createJwtToken(username,role.name());
     }
 }

@@ -24,9 +24,7 @@ public class ManagerController {
 
     @PostMapping
     public ResponseEntity<ManagerResponseDto> create (@Valid @RequestBody ManagerCreateDto dto){
-        System.out.println("Criando manager: " + dto.toString());
         Manager manager = service.save(ManagerMapper.dtoToManage(dto));
-        System.out.println("Manager salvo: " + manager.toString());
        return ResponseEntity.status(HttpStatus.CREATED).body(ManagerMapper.managerToResponseDto(manager));
     }
 
