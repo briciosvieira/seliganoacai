@@ -55,7 +55,11 @@ public class JwtUtils {
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
                 .claim("role", role)
                 .compact();
-        return new JwtToken();
+
+        JwtToken jwtToken = new JwtToken();
+        jwtToken.setToken(token);
+
+        return jwtToken;
     }
 
 
