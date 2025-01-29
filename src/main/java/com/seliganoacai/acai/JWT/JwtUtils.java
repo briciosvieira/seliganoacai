@@ -19,7 +19,7 @@ public class JwtUtils {
 
     public static final String BEARER =  "Bearer ";
     public static final String KEY =  "tlAum)J^F`V^HA421c0l=kqq3aR/O+0wn*nU;C";
-    public static final String AUTHORIZATION =  "AUTHORIZATION";
+    public static final String AUTHORIZATION =  "Authorization";
     public static final long day =  0;
     public static final long hours =  0;
     public static final long minutes =  1;
@@ -66,7 +66,7 @@ public class JwtUtils {
     //remove o valor que tem na variavel BEARER
     public static String removePrefixBearer(String token){
         if (token.contains(BEARER)){
-            return token.substring(BEARER.length());
+            return token.substring(BEARER.length()).trim();
         }
         return token;
     }
