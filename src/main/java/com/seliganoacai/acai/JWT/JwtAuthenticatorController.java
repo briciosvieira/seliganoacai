@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +26,7 @@ public class JwtAuthenticatorController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/auth")
-    public ResponseEntity<Object> autenticationUser(@RequestBody @Valid UserLoginDto dto){
+    public ResponseEntity<Object> autenticationUser(@RequestBody @Valid UserLoginDto dto, HttpServletRequest request){
 
         try{
 
@@ -37,8 +38,8 @@ public class JwtAuthenticatorController {
             return ResponseEntity.ok(token);
 
         } catch (AuthenticationException e) {
-            throw new AuthenticationException(String.format("Falha na Autenticação")) {
-            };
+
         }
+        return ResponseEntity.badRequest().body(new Object());
     }
 }

@@ -24,7 +24,7 @@ public class ManagerController {
     private ManagerService service;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+
     public ResponseEntity<ManagerResponseDto> create (@Valid @RequestBody ManagerCreateDto dto){
         Manager manager = service.save(ManagerMapper.dtoToManage(dto));
        return ResponseEntity.status(HttpStatus.CREATED).body(ManagerMapper.managerToResponseDto(manager));

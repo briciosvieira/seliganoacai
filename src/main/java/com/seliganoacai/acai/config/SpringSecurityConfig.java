@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-
+@EnableWebSecurity
 public class SpringSecurityConfig {
 
 
@@ -32,14 +33,14 @@ public class SpringSecurityConfig {
                                 .requestMatchers(HttpMethod.POST,"acai/auth").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                ).addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter(){
-
         return new JwtAuthorizationFilter();
     }
 

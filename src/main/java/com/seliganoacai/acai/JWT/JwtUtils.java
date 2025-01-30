@@ -18,11 +18,11 @@ package com.seliganoacai.acai.JWT;
 public class JwtUtils {
 
     public static final String BEARER =  "Bearer ";
-    public static final String KEY =  "tlAum)J^F`V^HA421c0l=kqq3aR/O+0wn*nU;C";
+    public static final String KEY =  "M5r8Q!zGdX2@fDk8Yb9#pLt7CwVxN0JqCdas";
     public static final String AUTHORIZATION =  "Authorization";
     public static final long day =  0;
-    public static final long hours =  0;
-    public static final long minutes =  1;
+    public static final long hours =  1;
+    public static final long minutes =  0;
 
     public JwtUtils() {
     }
@@ -43,43 +43,41 @@ public class JwtUtils {
     }
 
     //metodo de criação do token
-    public static JwtToken createJwtToken(String username, String role){
+    public static JwtToken createToken(String username, String role){
+        Date issueAt = new Date();
+        Date limit = expireTimeToken(issueAt);
 
-        Date issuiAt = new Date();
-        Date limitExpire = expireTimeToken(issuiAt);
-
-        String token = Jwts.builder().setHeaderParam("TYPE","JWT")
+        String token = Jwts.builder().setHeaderParam("typ","JWT")
                 .subject(username)
-                .issuedAt(issuiAt)
-                .expiration(limitExpire)
+                .issuedAt(issueAt)
+                .expiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
                 .claim("role", role)
                 .compact();
 
-        JwtToken jwtToken = new JwtToken();
-        jwtToken.setToken(token);
-
-        return jwtToken;
+        return new JwtToken(token);
     }
+
 
 
     //remove o valor que tem na variavel BEARER
     public static String removePrefixBearer(String token){
         if (token.contains(BEARER)){
-            return token.substring(BEARER.length()).trim();
+            return token.substring(BEARER.length());
         }
         return token;
     }
 
     //pega os dados que estão no cabeçalho, ou seja, no Cliams
-    public static Claims getCliamsFromToken(String token){
-
+    private static Claims getCliamsFromToken(String token){
         try {
             return Jwts.parser()
-                    .setSigningKey(generateKey()).build()
+                    .setSigningKey(generateKey())
+                    .build()
                     .parseClaimsJws(removePrefixBearer(token)).getBody();
-        } catch (JwtException e) {
-            System.out.println("Corrigir, Usuario não encontrado");
+
+        } catch (JwtException e){
+
         }
         return null;
     }

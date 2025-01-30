@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class UserLoginDto {
 
     @NotBlank
-    @Pattern(regexp = "[a-z]{10}.[a-z]{10}", message = "login deve conter no máximo 20 caracterer e um ponto: xxxxxxxxxx.xxxxxxxxxx")
+    @Size(min = 3, max = 20, message = "login deve conter no máximo 20 ")
     private String username;
     @NotBlank
     @Size(min = 5, max = 20, message ="A senha deve conter no mínimo 6 caracter e no máximo 20")
