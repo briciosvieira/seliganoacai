@@ -3,6 +3,7 @@ package com.seliganoacai.acai.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Client implements Serializable {
 
     @Id
@@ -23,7 +25,7 @@ public class Client implements Serializable {
     private String phone;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.CLIENTE;
+    private Role role = Role.ROLE_CLIENTE;
 
     @Override
     public boolean equals(Object o) {

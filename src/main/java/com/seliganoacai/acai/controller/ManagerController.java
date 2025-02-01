@@ -18,17 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("acai/users")
-@RequiredArgsConstructor
 public class ManagerController {
     @Autowired
     private ManagerService service;
 
     @PostMapping
-
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ManagerResponseDto> create (@Valid @RequestBody ManagerCreateDto dto){
         Manager manager = service.save(ManagerMapper.dtoToManage(dto));
        return ResponseEntity.status(HttpStatus.CREATED).body(ManagerMapper.managerToResponseDto(manager));
     }
-
-
 }

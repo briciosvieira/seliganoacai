@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,13 +17,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 public class Manager implements Serializable {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String username;
 
     @Column(nullable = false, length = 30)
@@ -32,7 +35,7 @@ public class Manager implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.ADMIN;
+    private Role role = Role.ROLE_ADMIN;
 
     @Override
     public boolean equals(Object o) {
