@@ -4,6 +4,9 @@ import com.seliganoacai.acai.entity.Manager;
 import com.seliganoacai.acai.webConfig.dto.ManagerCreateDto;
 import com.seliganoacai.acai.webConfig.dto.ManagerResponseDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ManagerMapper {
 
     public static Manager dtoToManage (ManagerCreateDto dto){
@@ -22,5 +25,9 @@ public class ManagerMapper {
         dto.setName(manager.getName());
         dto.setId(manager.getId());
         return dto;
+    }
+
+    public static List<ManagerResponseDto> toListDto(List<Manager> managers) {
+        return managers.stream().map(ManagerMapper::managerToResponseDto).collect(Collectors.toList());
     }
 }

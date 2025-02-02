@@ -15,4 +15,6 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
 
     @Query("SELECT m.role FROM Manager m WHERE m.username = :username")
     Role findRoleByUsername(@Param("username") String username);
+
+
 }

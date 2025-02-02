@@ -25,12 +25,11 @@ public class Product implements Serializable {
     private int quantity;
     @Column
     private double value;
-    @Column
     @ManyToMany
     @JoinTable(
-            name = "product_options",
+            name = "product_optional",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "option_id")
+            inverseJoinColumns = @JoinColumn(name = "optional_id")
     )
     private List<Optional> optional;
 
