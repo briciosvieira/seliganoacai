@@ -1,10 +1,15 @@
 package com.seliganoacai.acai.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,13 +30,22 @@ public class Product implements Serializable {
     private int quantity;
     @Column
     private double value;
+
+    @CreatedDate
+    @JsonFormat( pattern = "dd/MM/yyyy")
+    private LocalDateTime date_create;
+    @LastModifiedDate
+    private LocalDateTime date_update;
+
+    private boolean ckeckout;
+
     @ManyToMany
     @JoinTable(
             name = "product_optional",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "optional_id")
     )
-    private List<Optional> optional;
+    private List<Optional> optional = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -86,4 +100,27 @@ public class Product implements Serializable {
         this.optional = optional;
     }
 
+    public LocalDateTime getDate_create() {
+        return date_create;
+    }
+
+    public void setDate_create(LocalDateTime date_create) {
+        this.date_create = date_create;
+    }
+
+    public LocalDateTime getDate_update() {
+        return date_update;
+    }
+
+    public void setDate_update(LocalDateTime date_update) {
+        this.date_update = date_update;
+    }
+
+    public boolean isCkeckout() {
+        return ckeckout;
+    }
+
+    public void setCkeckout(boolean ckeckout) {
+        this.ckeckout = ckeckout;
+    }
 }

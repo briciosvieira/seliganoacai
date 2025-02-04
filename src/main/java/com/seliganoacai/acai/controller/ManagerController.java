@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("acai/users")
+@RequestMapping("acai/v1/users")
 public class ManagerController {
     @Autowired
     private ManagerService service;
@@ -44,7 +44,7 @@ public class ManagerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ManagerResponseDto> update(@PathVariable Long id, @RequestBody ManagerUpdateDto dto){
+    public ResponseEntity<ManagerResponseDto> update(@PathVariable Long id, @Valid @RequestBody ManagerUpdateDto dto){
         Manager manager = service.updateManager(id, dto.getName(), dto.getPassword(), dto.getUsername() );
         return ResponseEntity.ok().body(ManagerMapper.managerToResponseDto(manager));
     }
