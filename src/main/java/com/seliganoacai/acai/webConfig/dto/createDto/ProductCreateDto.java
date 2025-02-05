@@ -1,7 +1,6 @@
-package com.seliganoacai.acai.webConfig.dto;
+package com.seliganoacai.acai.webConfig.dto.createDto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,18 +11,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductResponseDto {
+public class ProductCreateDto {
+
 
     private String name;
     private String ml;
     private int quantity;
     private double value;
-    @JsonFormat( pattern = "dd/MM/yyyy")
     private LocalDateTime date_create;
-    @JsonFormat( pattern = "dd/MM/yyyy")
     private LocalDateTime date_update;
-    private List<String> optional;
+    private List<String> optionals;
 
     public String getName() {
         return name;
@@ -73,11 +70,11 @@ public class ProductResponseDto {
         this.date_update = date_update;
     }
 
-    public List<String> getOptional() {
-        return optional;
+    public List<String> getOptionals() {
+        return optionals;
     }
 
-    public void setOptional(List<String> optional) {
-        this.optional = optional;
+    public void setOptionals(List<String> optionals) {
+        this.optionals = optionals;
     }
 }

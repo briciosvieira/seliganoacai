@@ -1,9 +1,9 @@
 package com.seliganoacai.acai.controller;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.webConfig.dto.ManagerCreateDto;
-import com.seliganoacai.acai.webConfig.dto.ManagerResponseDto;
-import com.seliganoacai.acai.webConfig.dto.ManagerUpdateDto;
+import com.seliganoacai.acai.webConfig.dto.createDto.ManagerCreateDto;
+import com.seliganoacai.acai.webConfig.dto.responseDto.ManagerResponseDto;
+import com.seliganoacai.acai.webConfig.dto.updateDto.ManagerUpdateDto;
 import com.seliganoacai.acai.webConfig.modelMapper.ManagerMapper;
 import com.seliganoacai.acai.service.ManagerService;
 import jakarta.validation.Valid;
@@ -14,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("acai/v1/users")

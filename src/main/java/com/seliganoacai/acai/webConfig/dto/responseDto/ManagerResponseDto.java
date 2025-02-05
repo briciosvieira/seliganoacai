@@ -1,4 +1,4 @@
-package com.seliganoacai.acai.webConfig.dto;
+package com.seliganoacai.acai.webConfig.dto.responseDto;
 
 
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ public class ManagerResponseDto {
     private Long id;
     private String username;
     private String name;
+
 
     public Long getId() {
         return id;
@@ -36,4 +37,5 @@ public class ManagerResponseDto {
     public void setName(String name) {
         this.name = name;
     }
+
 }

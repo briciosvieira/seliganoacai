@@ -1,6 +1,7 @@
-package com.seliganoacai.acai.webConfig.dto;
+package com.seliganoacai.acai.webConfig.dto.responseDto;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,16 +12,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductCreateDto {
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductResponseDto {
 
     private String name;
     private String ml;
     private int quantity;
     private double value;
+    private double valueTotal;
+    private boolean ckeckout;
+    @JsonFormat( pattern = "dd/MM/yyyy")
     private LocalDateTime date_create;
+    @JsonFormat( pattern = "dd/MM/yyyy")
     private LocalDateTime date_update;
-    private List<String> optional;
+    private List<String> optionals;
+
 
     public String getName() {
         return name;
@@ -70,11 +76,27 @@ public class ProductCreateDto {
         this.date_update = date_update;
     }
 
-    public List<String> getOptional() {
-        return optional;
+    public List<String> getOptionals() {
+        return optionals;
     }
 
-    public void setOptional(List<String> optional) {
-        this.optional = optional;
+    public void setOptionals(List<String> optionals) {
+        this.optionals = optionals;
+    }
+
+    public double getValueTotal() {
+        return valueTotal;
+    }
+
+    public void setValueTotal(double valueTotal) {
+        this.valueTotal = valueTotal;
+    }
+
+    public boolean isCkeckout() {
+        return ckeckout;
+    }
+
+    public void setCkeckout(boolean ckeckout) {
+        this.ckeckout = ckeckout;
     }
 }

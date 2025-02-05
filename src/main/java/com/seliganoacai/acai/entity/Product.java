@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(EntityListeners.class)
+@EntityListeners(AuditingEntityListener.class)
 public class Product implements Serializable {
 
     @Id
@@ -30,22 +31,20 @@ public class Product implements Serializable {
     private int quantity;
     @Column
     private double value;
-
+    @Column
+    private double valueTotal;
     @CreatedDate
-    @JsonFormat( pattern = "dd/MM/yyyy")
     private LocalDateTime date_create;
     @LastModifiedDate
     private LocalDateTime date_update;
-
+    @Column
     private boolean ckeckout;
 
-    @ManyToMany
-    @JoinTable(
-            name = "product_optional",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "optional_id")
-    )
-    private List<Optional> optional = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "product_optionals", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "optional_name")
+    private List<String> optionals = new ArrayList<>();
+
 
     @Override
     public boolean equals(Object o) {
@@ -92,12 +91,12 @@ public class Product implements Serializable {
         this.value = value;
     }
 
-    public List<Optional> getOptional() {
-        return optional;
+    public List<String> getOptionals() {
+        return optionals;
     }
 
-    public void setOptional(List<Optional> optional) {
-        this.optional = optional;
+    public void setOptionals(List<String> optionals) {
+        this.optionals = optionals;
     }
 
     public LocalDateTime getDate_create() {
@@ -122,5 +121,13 @@ public class Product implements Serializable {
 
     public void setCkeckout(boolean ckeckout) {
         this.ckeckout = ckeckout;
+    }
+
+    public double getValueTotal() {
+        return valueTotal;
+    }
+
+    public void setValueTotal(double valueTotal) {
+        this.valueTotal = valueTotal;
     }
 }

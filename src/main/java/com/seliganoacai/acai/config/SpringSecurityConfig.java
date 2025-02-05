@@ -30,7 +30,7 @@ public class SpringSecurityConfig {
                 .cors( cors-> cors.configure(http))
                 .authorizeHttpRequests(authorization ->
                         authorization
-                                .requestMatchers(HttpMethod.POST,"acai/auth").permitAll()
+                                .requestMatchers(HttpMethod.POST,"acai/v1/auth").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -1,8 +1,8 @@
 package com.seliganoacai.acai.webConfig.modelMapper;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.webConfig.dto.ManagerCreateDto;
-import com.seliganoacai.acai.webConfig.dto.ManagerResponseDto;
+import com.seliganoacai.acai.webConfig.dto.createDto.ManagerCreateDto;
+import com.seliganoacai.acai.webConfig.dto.responseDto.ManagerResponseDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
