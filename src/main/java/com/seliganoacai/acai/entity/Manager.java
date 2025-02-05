@@ -3,13 +3,13 @@ package com.seliganoacai.acai.entity;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -23,15 +23,16 @@ public class Manager implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, length = 30, unique = true)
     private String username;
-
     @Column(nullable = false, length = 30)
     private String name;
-
     @Column(nullable = false)
     private String password;
+    @CreatedDate
+    private LocalDateTime date_create;
+    @LastModifiedDate
+    private LocalDateTime date_update;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -87,5 +88,21 @@ public class Manager implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public LocalDateTime getDate_create() {
+        return date_create;
+    }
+
+    public void setDate_create(LocalDateTime date_create) {
+        this.date_create = date_create;
+    }
+
+    public LocalDateTime getDate_update() {
+        return date_update;
+    }
+
+    public void setDate_update(LocalDateTime date_update) {
+        this.date_update = date_update;
     }
 }

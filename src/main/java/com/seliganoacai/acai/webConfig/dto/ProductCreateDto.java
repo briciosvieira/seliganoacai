@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class ProductCreateDto {
     private double value;
     private LocalDateTime date_create;
     private LocalDateTime date_update;
-    private List<String> optional;
+    private List<String> optionals;
 
     public String getName() {
         return name;
@@ -70,11 +71,11 @@ public class ProductCreateDto {
         this.date_update = date_update;
     }
 
-    public List<String> getOptional() {
-        return optional;
+    public List<String> getOptionals() {
+        return optionals;
     }
 
-    public void setOptional(List<String> optional) {
-        this.optional = optional;
+    public void setOptionals(List<String> optionals) {
+        this.optionals = optionals;
     }
 }

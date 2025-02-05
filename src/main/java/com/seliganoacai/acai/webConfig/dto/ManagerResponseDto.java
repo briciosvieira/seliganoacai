@@ -14,6 +14,7 @@ public class ManagerResponseDto {
     private String username;
     private String name;
 
+
     public Long getId() {
         return id;
     }
