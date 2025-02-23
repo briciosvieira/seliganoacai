@@ -21,9 +21,9 @@ public class ProductResponseDto {
     private double value;
     private double valueTotal;
     private boolean ckeckout;
-    @JsonFormat( pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
-    @JsonFormat( pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_update;
     private List<String> optionals;
 

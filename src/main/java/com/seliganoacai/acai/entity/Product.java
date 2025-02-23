@@ -31,6 +31,8 @@ public class Product implements Serializable {
     private int quantity;
     @Column
     private double value;
+    @Column
+    private double valueTotal;
     @CreatedDate
     private LocalDateTime date_create;
     @LastModifiedDate
@@ -119,5 +121,13 @@ public class Product implements Serializable {
 
     public void setCkeckout(boolean ckeckout) {
         this.ckeckout = ckeckout;
+    }
+
+    public double getValueTotal() {
+        return valueTotal;
+    }
+
+    public void setValueTotal(double valueTotal) {
+        this.valueTotal = valueTotal;
     }
 }
