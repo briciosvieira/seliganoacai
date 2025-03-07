@@ -6,6 +6,7 @@ import com.seliganoacai.acai.service.ProductService;
 import com.seliganoacai.acai.webConfig.dto.createDto.ProductCreateDto;
 import com.seliganoacai.acai.webConfig.dto.responseDto.PageableDto;
 import com.seliganoacai.acai.webConfig.dto.responseDto.ProductResponseDto;
+import com.seliganoacai.acai.webConfig.dto.updateDto.ProductUpdateDto;
 import com.seliganoacai.acai.webConfig.modelMapper.PageableMapper;
 import com.seliganoacai.acai.webConfig.modelMapper.ProductMapper;
 import jakarta.validation.Valid;
@@ -40,6 +41,12 @@ public class ProductController {
     public ResponseEntity<PageableDto> findAll(@PageableDefault(size = 5, sort = "id")Pageable pageable){
         Page<ProductProjectionDto> product = service.findByPageable(pageable);
         return ResponseEntity.ok(PageableMapper.toDto(product));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> update( @PathVariable Long id, @Valid @RequestBody ProductUpdateDto dto){
+        Product product = service.update(id, dto.getName(), dto.getMl(), dto.getQuantity(), dto.isCkeckout(), dto.getOptionals());
+        return ResponseEntity.ok(ProductMapper.entityToResponseDto(product));
     }
 
 }
