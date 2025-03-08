@@ -50,4 +50,9 @@ public class ProductService {
         return repository.save(product);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Product product = findById(id);
+        repository.delete(product);
+    }
 }
