@@ -6,6 +6,7 @@ import com.seliganoacai.acai.repository.ManagerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,13 @@ public class ManagerService {
 
     @Transactional
     public Manager save(Manager manager) {
+        try {
         manager.setPassword(passwordEncoder.encode(manager.getPassword()));
         return repository.save(manager);
+
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException("Não foi possível salvar o novo colaborador, entre em contato com Administrador");
+        }
     }
 
     @Transactional
@@ -37,7 +43,12 @@ public class ManagerService {
 
     @Transactional
     public List<Manager> findAll() {
+        try {
      return repository.findAll();
+
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException( " Não encontramos colaboradores cadastrados no momento");
+        }
     }
 
     @Transactional
@@ -47,7 +58,7 @@ public class ManagerService {
 
     @Transactional
     public Manager updateManager(Long id, String name, String password, String username) {
-
+        try{
         Manager manager = findById(id);
 
         if (name != null && !name.isEmpty()) {
@@ -63,11 +74,20 @@ public class ManagerService {
         }
 
         return repository.save(manager);
+
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException("Bão foi possível editar os dados do colaborador, verifique com o Administrador e tente novamente!");
+        }
     }
 
     @Transactional
     public void delete(Long id) {
+        try {
         Manager manager = findById(id);
         repository.delete(manager);
+
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException("Dados informados não encontrado ou não existe!");
+        }
     }
 }
