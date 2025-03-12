@@ -6,6 +6,7 @@ import com.seliganoacai.acai.repository.ManagerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class ManagerService {
         manager.setPassword(passwordEncoder.encode(manager.getPassword()));
         return repository.save(manager);
 
-        } catch (RuntimeException e) {
-            throw new EntityNotFoundException("Não foi possível salvar o novo colaborador, entre em contato com Administrador");
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Não foi possível salvar o novo colaborador, entre em contato com Administrador");
         }
     }
 

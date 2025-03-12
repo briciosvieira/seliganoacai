@@ -1,6 +1,7 @@
 package com.seliganoacai.acai.config;
 
 
+import com.seliganoacai.acai.JWT.JwtAuthEntryPoint;
 import com.seliganoacai.acai.JWT.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ public class SpringSecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 ).addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(new JwtAuthEntryPoint()))
                 .build();
     }
 
