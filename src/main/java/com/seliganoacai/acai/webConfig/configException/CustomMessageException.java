@@ -10,7 +10,7 @@ import org.springframework.validation.FieldError;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
+
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomMessageException {
@@ -32,9 +32,16 @@ public class CustomMessageException {
         this.textStatus = status.getReasonPhrase();
         this.messageCustom = messageCustom;
 
-        if (result !=null && result.hasErrors()){
-            addErros(result);
-        }
+        addErros(result);
+    }
+
+    public CustomMessageException(HttpServletRequest request, HttpStatus status, String messageCustom) {
+        this.path = request.getRequestURI();
+        this.method = request.getMethod();
+        this.status = status.value();
+        this.textStatus = status.getReasonPhrase();
+        this.messageCustom = messageCustom;
+
     }
 
     private void addErros(BindingResult result){
@@ -43,5 +50,29 @@ public class CustomMessageException {
         for (FieldError fieldError: result.getFieldErrors()){
             this.errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getTextStatus() {
+        return textStatus;
+    }
+
+    public String getMessageCustom() {
+        return messageCustom;
+    }
+
+    public Map<String, String> getErrors() {
+        return errors;
     }
 }

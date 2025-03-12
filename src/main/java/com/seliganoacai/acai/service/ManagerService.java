@@ -2,12 +2,12 @@ package com.seliganoacai.acai.service;
 
 import com.seliganoacai.acai.entity.Manager;
 import com.seliganoacai.acai.entity.Role;
+import com.seliganoacai.acai.exception.UsernameUniqueViolationException;
 import com.seliganoacai.acai.repository.ManagerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class ManagerService {
         return repository.save(manager);
 
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("Não foi possível salvar o novo colaborador, entre em contato com Administrador");
+            throw new UsernameUniqueViolationException( String.format("Não foi possível salvar o novo colaborador o %s já existe", manager.getUsername()));
         }
     }
 
