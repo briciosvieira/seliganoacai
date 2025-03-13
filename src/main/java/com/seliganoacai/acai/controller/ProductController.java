@@ -45,7 +45,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> update( @PathVariable Long id, @Valid @RequestBody ProductUpdateDto dto){
-        Product product = service.update(id, dto.getName(), dto.getMl(), dto.getQuantity(), dto.isCkeckout(), dto.getOptionals());
+        Product product = service.update(id, dto.getName(), dto.getQuantity());
         return ResponseEntity.ok(ProductMapper.entityToResponseDto(product));
     }
 

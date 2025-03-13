@@ -1,7 +1,7 @@
 package com.seliganoacai.acai.JWT;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.entity.Role;
+import com.seliganoacai.acai.entity.enums.Role;
 import com.seliganoacai.acai.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

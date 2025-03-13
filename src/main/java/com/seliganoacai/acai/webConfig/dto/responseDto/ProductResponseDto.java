@@ -16,16 +16,15 @@ import java.util.List;
 public class ProductResponseDto {
 
     private String name;
-    private String ml;
     private int quantity;
     private double value;
     private double valueTotal;
-    private boolean ckeckout;
+
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_update;
-    private List<String> optionals;
+
 
 
     public String getName() {
@@ -36,13 +35,7 @@ public class ProductResponseDto {
         this.name = name;
     }
 
-    public String getMl() {
-        return ml;
-    }
 
-    public void setMl(String ml) {
-        this.ml = ml;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -76,14 +69,6 @@ public class ProductResponseDto {
         this.date_update = date_update;
     }
 
-    public List<String> getOptionals() {
-        return optionals;
-    }
-
-    public void setOptionals(List<String> optionals) {
-        this.optionals = optionals;
-    }
-
     public double getValueTotal() {
         return valueTotal;
     }
@@ -92,11 +77,5 @@ public class ProductResponseDto {
         this.valueTotal = valueTotal;
     }
 
-    public boolean isCkeckout() {
-        return ckeckout;
-    }
 
-    public void setCkeckout(boolean ckeckout) {
-        this.ckeckout = ckeckout;
-    }
 }

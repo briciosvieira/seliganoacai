@@ -31,7 +31,7 @@ public class ManagerResponseDto {
         this.username = username;
     }
 
-    public String getName() {        return name;
+    public String getName() {return name;
     }
 
     public void setName(String name) {

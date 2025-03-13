@@ -1,4 +1,4 @@
-package com.seliganoacai.acai.entity;
+package com.seliganoacai.acai.entity.enums;
 
 public enum Role {
 

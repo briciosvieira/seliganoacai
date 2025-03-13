@@ -1,7 +1,7 @@
 package com.seliganoacai.acai.repository;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.entity.Role;
+import com.seliganoacai.acai.entity.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

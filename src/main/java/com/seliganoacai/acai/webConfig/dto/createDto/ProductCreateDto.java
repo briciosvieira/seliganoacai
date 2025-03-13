@@ -4,10 +4,7 @@ package com.seliganoacai.acai.webConfig.dto.createDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,12 +13,10 @@ public class ProductCreateDto {
 
 
     private String name;
-    private String ml;
     private int quantity;
     private double value;
     private LocalDateTime date_create;
     private LocalDateTime date_update;
-    private List<String> optionals;
 
     public String getName() {
         return name;
@@ -29,14 +24,6 @@ public class ProductCreateDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getMl() {
-        return ml;
-    }
-
-    public void setMl(String ml) {
-        this.ml = ml;
     }
 
     public int getQuantity() {
@@ -71,11 +58,4 @@ public class ProductCreateDto {
         this.date_update = date_update;
     }
 
-    public List<String> getOptionals() {
-        return optionals;
-    }
-
-    public void setOptionals(List<String> optionals) {
-        this.optionals = optionals;
-    }
 }

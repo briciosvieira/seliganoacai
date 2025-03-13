@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Product update(Long id,  String name, String ml,  int quantity, boolean ckeckout,List<String> optionals) {
+    public Product update(Long id,  String name,   int quantity) {
 
         try {
 
@@ -57,10 +57,7 @@ public class ProductService {
         }
 
         product.setName(name);
-        product.setMl(ml);
         product.setQuantity(quantity);
-        product.setCkeckout(ckeckout);
-        product.setOptionals(optionals);
         return repository.save(product);
 
         } catch (RuntimeException e) {

@@ -8,9 +8,7 @@ import org.modelmapper.ModelMapper;
 public class ProductMapper {
 
     public static Product dtoToEntity (ProductCreateDto dto){
-        Product product = new  ModelMapper().map(dto, Product.class);
-        product.setOptionals(dto.getOptionals());
-        return product;
+        return new  ModelMapper().map(dto, Product.class);
     }
 
     public static ProductResponseDto entityToResponseDto (Product product){

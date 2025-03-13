@@ -1,5 +1,6 @@
 package com.seliganoacai.acai.entity;
 
+import com.seliganoacai.acai.entity.enums.Role;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;

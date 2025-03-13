@@ -1,7 +1,7 @@
 package com.seliganoacai.acai.service;
 
 import com.seliganoacai.acai.entity.Manager;
-import com.seliganoacai.acai.entity.Role;
+import com.seliganoacai.acai.entity.enums.Role;
 import com.seliganoacai.acai.exception.UsernameUniqueViolationException;
 import com.seliganoacai.acai.repository.ManagerRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 

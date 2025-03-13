@@ -1,48 +1,52 @@
 package com.seliganoacai.acai.webConfig.dto.createDto;
-
-
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class ManagerCreateDto {
 
 
     @NotBlank(message = "Username em brancou ou nulo, gentileza verificar")
+    @Size(min = 4, max = 20)
     private String username;
 
     @NotBlank(message = "Name em brancou ou nulo, gentileza verificar")
+    @Size(min = 4, max = 50)
     private String name;
 
 
     @NotBlank(message = "Password em brancou ou nulo, gentileza verificar")
+    @Size(min = 4, max = 30)
     private String password;
 
 
 
-    public @NotBlank(message = "Username em brancou ou nulo, gentileza verificar") String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NotBlank(message = "Username em brancou ou nulo, gentileza verificar") String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public @NotBlank(message = "Name em brancou ou nulo, gentileza verificar") String getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(@NotBlank(message = "Name em brancou ou nulo, gentileza verificar") String name) {
+    public void setName( String name) {
         this.name = name;
     }
 
-    public @NotBlank(message = "Password em brancou ou nulo, gentileza verificar") String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotBlank(message = "Password em brancou ou nulo, gentileza verificar") String password) {
+    public void setPassword( String password) {
         this.password = password;
     }
 }
