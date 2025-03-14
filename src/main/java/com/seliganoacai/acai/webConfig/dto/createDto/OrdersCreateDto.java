@@ -1,17 +1,18 @@
 package com.seliganoacai.acai.webConfig.dto.createDto;
+import com.seliganoacai.acai.entity.Product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 
 import java.util.List;
 
-public class OrderCreateDto {
+public class OrdersCreateDto {
 
     @NotBlank(message = "O Cliente deve informar o nome")
     @Size(min = 3, max = 40)
     private String name;
     @NotBlank(message = "Campo para pedidos deve ser preenchido")
-    private List<String> produtos;
+    private List<Product> products;
     @NotBlank(message = "O opcional deve ser preenchido")
     private List<String> opcionais;
 
@@ -23,12 +24,12 @@ public class OrderCreateDto {
         this.name = name;
     }
 
-    public @NotBlank List<String> getProdutos() {
-        return produtos;
+    public @NotBlank(message = "Campo para pedidos deve ser preenchido") List<Product> getProducts() {
+        return products;
     }
 
-    public void setProdutos(@NotBlank List<String> produtos) {
-        this.produtos = produtos;
+    public void setProducts(@NotBlank(message = "Campo para pedidos deve ser preenchido") List<Product> products) {
+        this.products = products;
     }
 
     public @NotBlank List<String> getOpcionais() {

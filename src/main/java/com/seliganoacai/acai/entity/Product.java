@@ -29,8 +29,6 @@ public class Product implements Serializable {
     private int quantity;
     @Column
     private double value;
-    @Column
-    private double valueTotal;
     @CreatedDate
     private LocalDateTime date_create;
     @LastModifiedDate
@@ -50,6 +48,9 @@ public class Product implements Serializable {
         return Objects.hashCode(id);
     }
 
+    public Long getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -91,11 +92,4 @@ public class Product implements Serializable {
         this.date_update = date_update;
     }
 
-    public double getValueTotal() {
-        return valueTotal;
-    }
-
-    public void setValueTotal(double valueTotal) {
-        this.valueTotal = valueTotal;
-    }
 }

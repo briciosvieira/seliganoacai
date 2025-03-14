@@ -1,19 +1,21 @@
 package com.seliganoacai.acai.webConfig.dto.responseDto;
 
 
+import com.seliganoacai.acai.entity.Product;
+
 import java.util.List;
 
-public class OrderResponseDto {
+public class OrdersResponseDto {
     private String name;
-    private List<String> produtos;
+    private List<Product> products;
     private List<String> opcionais;
 
     public String getName() {
         return name;
     }
 
-    public List<String> getProdutos() {
-        return produtos;
+    public List<Product> getProducts() {
+        return products;
     }
 
     public List<String> getOpcionais() {

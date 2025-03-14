@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Order implements Serializable {
+public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,20 +22,32 @@ public class Order implements Serializable {
     private String name;
 
     @ManyToMany
-    private List<Product> produtos;
+    private List<Product> products;
 
     @ManyToMany
     private List<Optional> opcionais;
 
+    @Column(nullable = false)
+    private double totalValue;
+
+    @ManyToOne
+    private Manager manager;
+
     @Enumerated(EnumType.STRING)
     private StatusOrder status = StatusOrder.EM_PREPARACAO;
+
+    public void calculateTotalValue() {
+        this.totalValue = products.stream()
+                .mapToDouble(Product::getValue)
+                .sum();
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id);
+        Orders orders = (Orders) o;
+        return Objects.equals(id, orders.id);
     }
 
     @Override
@@ -51,12 +63,12 @@ public class Order implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProdutos() {
-        return produtos;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProdutos(List<Product> produtos) {
-        this.produtos = produtos;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public List<Optional> getOpcionais() {
@@ -73,5 +85,13 @@ public class Order implements Serializable {
 
     public void setStatus(StatusOrder status) {
         this.status = status;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

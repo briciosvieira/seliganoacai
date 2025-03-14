@@ -21,8 +21,7 @@ public class ProductService {
     @Transactional
     public Product create(Product product) {
         try {
-        var valueTotal = product.getQuantity() * product.getValue();
-        product.setValueTotal(valueTotal);
+
         return repository.save(product);
 
         } catch (RuntimeException e) {
@@ -44,18 +43,12 @@ public class ProductService {
     }
 
     @Transactional
-    public Product update(Long id,  String name,   int quantity) {
+    public Product update(Long id,  String name, int quantity) {
 
         try {
 
         Product product;
         product = findById(id);
-
-        if (quantity > product.getQuantity() || quantity < product.getQuantity()){
-            var value = quantity * product.getValue();
-            product.setValueTotal(value);
-        }
-
         product.setName(name);
         product.setQuantity(quantity);
         return repository.save(product);

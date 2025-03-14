@@ -18,8 +18,6 @@ public class ProductResponseDto {
     private String name;
     private int quantity;
     private double value;
-    private double valueTotal;
-
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
@@ -69,13 +67,6 @@ public class ProductResponseDto {
         this.date_update = date_update;
     }
 
-    public double getValueTotal() {
-        return valueTotal;
-    }
-
-    public void setValueTotal(double valueTotal) {
-        this.valueTotal = valueTotal;
-    }
 
 
 }

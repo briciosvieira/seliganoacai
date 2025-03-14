@@ -11,12 +11,16 @@ import java.time.LocalDateTime;
 @ToString
 public class ProductCreateDto {
 
-
+    private Long id;
     private String name;
     private int quantity;
     private double value;
     private LocalDateTime date_create;
     private LocalDateTime date_update;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

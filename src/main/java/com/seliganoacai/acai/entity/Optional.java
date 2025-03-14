@@ -36,7 +36,11 @@ public class Optional implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getOptional() {
+        return optional;
+    }
+
+    public void setOptional(String optional) {
+        this.optional = optional;
     }
 }

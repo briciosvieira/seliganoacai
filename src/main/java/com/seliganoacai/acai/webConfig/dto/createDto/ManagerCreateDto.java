@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class ManagerCreateDto {
 
+    private Long id;
 
     @NotBlank(message = "Username em brancou ou nulo, gentileza verificar")
     @Size(min = 4, max = 20)
@@ -24,7 +25,9 @@ public class ManagerCreateDto {
     @Size(min = 4, max = 30)
     private String password;
 
-
+    public Long getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
