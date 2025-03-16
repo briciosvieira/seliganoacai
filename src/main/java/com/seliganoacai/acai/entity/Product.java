@@ -3,6 +3,7 @@ package com.seliganoacai.acai.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -23,10 +24,10 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private String name;
-    @Column
-    private int quantity;
+    @Column(nullable = false)
+    private String description;
+    @OneToMany(mappedBy = "product")
+    private List<RelacionamentOrdersProduct> relacionamentOrdersProduct = new ArrayList<>();
     @Column
     private double value;
     @CreatedDate
@@ -51,20 +52,21 @@ public class Product implements Serializable {
     public Long getId() {
         return id;
     }
-    public String getName() {
-        return name;
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public List<RelacionamentOrdersProduct> getRelacionamentOrdersProduct() {
+        return relacionamentOrdersProduct;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setRelacionamentOrdersProduct(List<RelacionamentOrdersProduct> relacionamentOrdersProduct) {
+        this.relacionamentOrdersProduct = relacionamentOrdersProduct;
     }
 
     public double getValue() {

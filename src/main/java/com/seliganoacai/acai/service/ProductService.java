@@ -20,14 +20,17 @@ public class ProductService {
 
     @Transactional
     public Product create(Product product) {
-        try {
+        if (product.getDescription() == null || product.getDescription().isEmpty()) {
+            throw new IllegalArgumentException("A descrição do produto é obrigatória.");
+        }
+        if (product.getValue() <= 0) {
+            throw new IllegalArgumentException("O valor do produto deve ser maior que zero.");
+        }
 
         return repository.save(product);
-
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Não foi possível adicionar o produto, tente novamente, caso o erro persista, entre em contato com o Administrador.");
-        }
     }
+
+
     @Transactional
     public Product findById(Long id) {
         return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Pedido não encontrado!"));
@@ -49,8 +52,7 @@ public class ProductService {
 
         Product product;
         product = findById(id);
-        product.setName(name);
-        product.setQuantity(quantity);
+        product.setDescription(name);
         return repository.save(product);
 
         } catch (RuntimeException e) {
@@ -68,5 +70,10 @@ public class ProductService {
         } catch (RuntimeException e) {
             throw new EntityNotFoundException("Talvez o produto informado não exista mais no banco de dados, tente novamente ou contact o Administrador.");
         }
+    }
+
+    @Transactional
+    public List<Product> findByIds(List<Long> productIds) {
+        return repository.findAllById(productIds);
     }
 }

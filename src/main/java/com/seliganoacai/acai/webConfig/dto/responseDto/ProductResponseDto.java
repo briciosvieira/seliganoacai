@@ -4,43 +4,41 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+
+
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductResponseDto {
 
-    private String name;
-    private int quantity;
+    private String description;
     private double value;
+    private int quantity;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_update;
 
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
+    public ProductResponseDto(String description, double value, int quantity) {
+        this.description = description;
+        this.value = value;
         this.quantity = quantity;
+    }
+
+    public ProductResponseDto() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getValue() {
@@ -67,6 +65,11 @@ public class ProductResponseDto {
         this.date_update = date_update;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

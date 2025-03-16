@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,27 +20,29 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @ManyToMany
-    private List<Product> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RelacionamentOrdersProduct> relacionamentOrdersProducts = new ArrayList<>();
+
 
     @ManyToMany
-    private List<Optional> opcionais;
+    private List<Optional> opcionals = new ArrayList<>();
 
     @Column(nullable = false)
     private double totalValue;
 
-    @ManyToOne
-    private Manager manager;
 
     @Enumerated(EnumType.STRING)
     private StatusOrder status = StatusOrder.EM_PREPARACAO;
 
-    public void calculateTotalValue() {
-        this.totalValue = products.stream()
-                .mapToDouble(Product::getValue)
+
+    public double calculateTotalValue() {
+        this.totalValue = relacionamentOrdersProducts.stream()
+                .mapToDouble(x -> x.getProduct().getValue() * x.getQuantity())
                 .sum();
+        return this.totalValue;
     }
 
     @Override
@@ -63,20 +66,20 @@ public class Orders implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<RelacionamentOrdersProduct> getRelacionamentOrdersProducts() {
+        return relacionamentOrdersProducts;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setRelacionamentOrdersProducts(List<RelacionamentOrdersProduct> relacionamentOrdersProducts) {
+        this.relacionamentOrdersProducts = relacionamentOrdersProducts;
     }
 
-    public List<Optional> getOpcionais() {
-        return opcionais;
+    public List<Optional> getOpcionals() {
+        return opcionals;
     }
 
-    public void setOpcionais(List<Optional> opcionais) {
-        this.opcionais = opcionais;
+    public void setOpcionals(List<Optional> opcionals) {
+        this.opcionals = opcionals;
     }
 
     public StatusOrder getStatus() {
@@ -87,11 +90,11 @@ public class Orders implements Serializable {
         this.status = status;
     }
 
-    public Manager getManager() {
-        return manager;
+    public double getTotalValue() {
+        return totalValue;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setTotalValue(double totalValue) {
+        this.totalValue = totalValue;
     }
 }

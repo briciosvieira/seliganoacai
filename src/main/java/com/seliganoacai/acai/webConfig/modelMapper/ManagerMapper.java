@@ -23,7 +23,6 @@ public class ManagerMapper {
         ManagerResponseDto dto = new ManagerResponseDto();
         dto.setUsername(manager.getUsername());
         dto.setName(manager.getName());
-        dto.setId(manager.getId());
         return dto;
     }
 

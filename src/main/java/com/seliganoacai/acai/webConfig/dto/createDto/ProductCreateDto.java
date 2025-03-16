@@ -11,31 +11,18 @@ import java.time.LocalDateTime;
 @ToString
 public class ProductCreateDto {
 
-    private Long id;
-    private String name;
-    private int quantity;
+    private String description;
+
     private double value;
     private LocalDateTime date_create;
     private LocalDateTime date_update;
 
-    public Long getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getValue() {
