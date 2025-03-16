@@ -18,16 +18,15 @@ public class ProductResponseDto {
 
     private String description;
     private double value;
-    private int quantity;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_update;
 
-    public ProductResponseDto(String description, double value, int quantity) {
+    public ProductResponseDto(String description, double value) {
         this.description = description;
         this.value = value;
-        this.quantity = quantity;
+
     }
 
     public ProductResponseDto() {
@@ -65,11 +64,4 @@ public class ProductResponseDto {
         this.date_update = date_update;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

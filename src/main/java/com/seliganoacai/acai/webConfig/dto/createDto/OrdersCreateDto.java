@@ -13,26 +13,25 @@ public class OrdersCreateDto {
     private String name;
 
     @NotEmpty(message = "A lista de produtos não pode estar vazia")
-    private List<Long> products; // IDs dos produtos
+    private List<ProductQuantityDto> products; // IDs dos produtos
 
     @NotEmpty(message = "A lista de opcionais não pode estar vazia")
     private List<Long> optionals; // IDs dos opcionais
 
-    // Getters e Setters
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@Size(min = 3, max = 40, message = "O nome deve ter entre 3 e 40 caracteres") @NotBlank(message = "O cliente deve informar o nome") String name) {
         this.name = name;
     }
 
-    public List<Long> getProducts() {
+    public @NotEmpty(message = "A lista de produtos não pode estar vazia") List<ProductQuantityDto> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Long> products) {
+    public void setProducts(@NotEmpty(message = "A lista de produtos não pode estar vazia") List<ProductQuantityDto> products) {
         this.products = products;
     }
 
