@@ -57,7 +57,7 @@ public class OrdersService {
                         .collect(Collectors.toList())
         );
         if (products.isEmpty() || products.size() != dto.getProducts().size()) {
-            throw new EntityNotFoundException("Um ou mais produtos não foram encontrados.");
+            throw new EntityNotFoundException("Produtos não foram encontrados.");
         }
 
 
@@ -77,7 +77,7 @@ public class OrdersService {
         if (!dto.getOptionals().isEmpty()) {
             optionals = optionalService.findByIds(dto.getOptionals());
             if (optionals.size() != dto.getOptionals().size()) {
-                throw new EntityNotFoundException("Um ou mais opcionais não foram encontrados.");
+                throw new EntityNotFoundException("Opcionais não foram encontrados.");
             }
         }
 
