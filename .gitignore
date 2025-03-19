@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## arquivo com credenciais
+
+spring-firebase-key.json
