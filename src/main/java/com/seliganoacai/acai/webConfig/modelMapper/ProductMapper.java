@@ -12,6 +12,8 @@ public class ProductMapper {
     }
 
     public static ProductResponseDto entityToResponseDto (Product product){
-        return new ModelMapper().map(product, ProductResponseDto.class);
+        ProductResponseDto responseDto = new ModelMapper().map(product, ProductResponseDto.class);
+        responseDto.setImageUrl(product.getImageUrl());
+        return responseDto;
     }
 }

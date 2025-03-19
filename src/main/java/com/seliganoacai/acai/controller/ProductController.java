@@ -15,8 +15,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("acai/v1/product")
@@ -25,9 +29,17 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @PostMapping
-    public ResponseEntity<ProductResponseDto> create (@Valid @RequestBody ProductCreateDto dto){
-        Product product = service.create(ProductMapper.dtoToEntity(dto));
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProductResponseDto> create ( @RequestParam("description") String description,
+                                                       @RequestParam("value") double value,
+                                                       @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
+
+            ProductCreateDto productDto = new ProductCreateDto();
+            productDto.setDescription(description);
+            productDto.setValue(value);
+            productDto.setImageUrl(image);
+
+        Product product = service.create(description, value, image);
         return ResponseEntity.status(HttpStatus.CREATED).body(ProductMapper.entityToResponseDto(product));
     }
 

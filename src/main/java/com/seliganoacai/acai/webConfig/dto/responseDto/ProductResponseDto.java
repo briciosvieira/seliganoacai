@@ -18,6 +18,7 @@ public class ProductResponseDto {
 
     private String description;
     private double value;
+    private String imageUrl;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime date_create;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
@@ -38,6 +39,14 @@ public class ProductResponseDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getValue() {

@@ -4,6 +4,8 @@ package com.seliganoacai.acai.webConfig.dto.createDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -12,8 +14,8 @@ import java.time.LocalDateTime;
 public class ProductCreateDto {
 
     private String description;
-
     private double value;
+    private MultipartFile imageUrl;
     private LocalDateTime date_create;
     private LocalDateTime date_update;
 
@@ -23,6 +25,14 @@ public class ProductCreateDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public MultipartFile getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(MultipartFile imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getValue() {

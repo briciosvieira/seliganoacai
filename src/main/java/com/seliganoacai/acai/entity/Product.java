@@ -28,6 +28,8 @@ public class Product implements Serializable {
     private String description;
     @OneToMany(mappedBy = "product")
     private List<RelacionamentOrdersProduct> relacionamentOrdersProduct = new ArrayList<>();
+    @Column(nullable = false)
+    private String imageUrl;
     @Column
     private double value;
     @CreatedDate
@@ -94,4 +96,11 @@ public class Product implements Serializable {
         this.date_update = date_update;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

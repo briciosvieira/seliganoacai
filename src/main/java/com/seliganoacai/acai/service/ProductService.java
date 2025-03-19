@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -18,16 +21,28 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private FirebaseService firebaseService;
+
     @Transactional
-    public Product create(Product product) {
-        if (product.getDescription() == null || product.getDescription().isEmpty()) {
+    public Product create(String description, double value, MultipartFile image) throws IOException {
+        if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("A descrição do produto é obrigatória.");
         }
-        if (product.getValue() <= 0) {
+        if (value <= 0) {
             throw new IllegalArgumentException("O valor do produto deve ser maior que zero.");
         }
+        Product product = new Product();
+        product.setDescription(description);
+        product.setValue(value);
 
-        return repository.save(product);
+        if ( image !=null && !image.isEmpty()){
+            String imageUrl = firebaseService.upload(image, "products/" + UUID.randomUUID());
+            product.setImageUrl(imageUrl);
+        }
+
+        var  savedProduct = repository.save(product);
+        return savedProduct;
     }
 
 
