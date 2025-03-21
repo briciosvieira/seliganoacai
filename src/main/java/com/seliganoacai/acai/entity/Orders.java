@@ -24,6 +24,9 @@ public class Orders implements Serializable {
     private String name;
 
     @Column(nullable = false)
+    private String numberOrder;
+
+    @Column(nullable = false)
     private double totalValue;
 
     @Enumerated(EnumType.STRING)
@@ -94,5 +97,13 @@ public class Orders implements Serializable {
 
     public void setTotalValue(double totalValue) {
         this.totalValue = totalValue;
+    }
+
+    public String getNumberOrder() {
+        return numberOrder;
+    }
+
+    public void setNumberOrder(String numberOrder) {
+        this.numberOrder = numberOrder;
     }
 }

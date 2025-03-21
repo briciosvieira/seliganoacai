@@ -5,20 +5,20 @@ import java.util.List;
 
 public class OrdersResponseDto {
 
-    private Long id;
+
+    private String numberOrder;
     private String name;
     private double totalValue;
     private List<RelacionamentOrdersProductResponseDto> relacionamentOrdersProducts;
     private List<OptionalResponseDto> opcionals;
 
-    // Getters e Setters
 
-    public Long getId() {
-        return id;
+    public String getNumberOrder() {
+        return numberOrder;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNumberOrder(String numberOrder) {
+        this.numberOrder = numberOrder;
     }
 
     public String getName() {

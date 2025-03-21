@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OrdersCreateDto {
 
+
     @Size(min = 3, max = 40, message = "O nome deve ter entre 3 e 40 caracteres")
     @NotBlank(message = "O cliente deve informar o nome")
     private String name;
@@ -42,4 +43,6 @@ public class OrdersCreateDto {
     public void setOptionals(List<Long> optionals) {
         this.optionals = optionals;
     }
+
+
 }

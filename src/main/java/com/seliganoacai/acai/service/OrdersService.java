@@ -6,6 +6,7 @@ import com.seliganoacai.acai.entity.Product;
 import com.seliganoacai.acai.entity.RelacionamentOrdersProduct;
 import com.seliganoacai.acai.repository.OrdersRepository;
 import com.seliganoacai.acai.repository.RelacionamentOrdersProductRepository;
+import com.seliganoacai.acai.utils.Utils;
 import com.seliganoacai.acai.webConfig.dto.createDto.OrdersCreateDto;
 import com.seliganoacai.acai.webConfig.dto.createDto.ProductQuantityDto;
 import jakarta.persistence.EntityNotFoundException;
@@ -49,6 +50,8 @@ public class OrdersService {
 
         Orders newOrders = new Orders();
         newOrders.setName(dto.getName());
+        String ticket = Utils.generateTicket();
+        newOrders.setNumberOrder(ticket);
 
 
         List<Product> products = productService.findByIds(

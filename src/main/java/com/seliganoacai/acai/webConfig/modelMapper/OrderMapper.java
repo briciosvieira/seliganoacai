@@ -21,6 +21,7 @@ public class OrderMapper {
     public static OrdersResponseDto toDto(Orders orders) {
         OrdersResponseDto dto = new OrdersResponseDto();
         dto.setName(orders.getName());
+        dto.setNumberOrder(orders.getNumberOrder());
         dto.setTotalValue(orders.getTotalValue());
 
         // Mapeia os relacionamentos (produtos)
