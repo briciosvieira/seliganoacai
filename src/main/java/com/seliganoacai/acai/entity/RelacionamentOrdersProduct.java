@@ -11,6 +11,10 @@ public class RelacionamentOrdersProduct implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private int quantity;
+
+
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Orders order;
@@ -18,9 +22,6 @@ public class RelacionamentOrdersProduct implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
-
-    @Column(nullable = false)
-    private int quantity;
 
     public RelacionamentOrdersProduct() {
     }

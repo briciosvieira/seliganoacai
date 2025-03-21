@@ -26,17 +26,16 @@ public class Product implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String description;
-    @OneToMany(mappedBy = "product")
-    private List<RelacionamentOrdersProduct> relacionamentOrdersProduct = new ArrayList<>();
     @Column(nullable = false)
     private String imageUrl;
     @Column
     private double value;
+    @OneToMany(mappedBy = "product")
+    private List<RelacionamentOrdersProduct> relacionamentOrdersProduct = new ArrayList<>();
     @CreatedDate
     private LocalDateTime date_create;
     @LastModifiedDate
     private LocalDateTime date_update;
-
 
     @Override
     public boolean equals(Object o) {

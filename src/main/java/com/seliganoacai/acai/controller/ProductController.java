@@ -39,7 +39,7 @@ public class ProductController {
             productDto.setValue(value);
             productDto.setImageUrl(image);
 
-        Product product = service.create(description, value, image);
+        Product product = service.create(productDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(ProductMapper.entityToResponseDto(product));
     }
 

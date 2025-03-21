@@ -23,19 +23,17 @@ public class Orders implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RelacionamentOrdersProduct> relacionamentOrdersProducts = new ArrayList<>();
+    @Column(nullable = false)
+    private double totalValue;
 
+    @Enumerated(EnumType.STRING)
+    private StatusOrder status = StatusOrder.EM_PREPARACAO;
 
     @ManyToMany
     private List<Optional> opcionals = new ArrayList<>();
 
-    @Column(nullable = false)
-    private double totalValue;
-
-
-    @Enumerated(EnumType.STRING)
-    private StatusOrder status = StatusOrder.EM_PREPARACAO;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RelacionamentOrdersProduct> relacionamentOrdersProducts = new ArrayList<>();
 
 
     public double calculateTotalValue() {
