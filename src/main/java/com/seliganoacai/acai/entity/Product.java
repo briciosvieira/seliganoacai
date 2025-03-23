@@ -1,9 +1,7 @@
 package com.seliganoacai.acai.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,7 +29,7 @@ public class Product implements Serializable {
     @Column
     private double value;
     @OneToMany(mappedBy = "product")
-    private List<RelacionamentOrdersProduct> relacionamentOrdersProduct = new ArrayList<>();
+    private List<RelationsOrdersProduct> relationsOrdersProduct = new ArrayList<>();
     @CreatedDate
     private LocalDateTime date_create;
     @LastModifiedDate
@@ -62,12 +60,12 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public List<RelacionamentOrdersProduct> getRelacionamentOrdersProduct() {
-        return relacionamentOrdersProduct;
+    public List<RelationsOrdersProduct> getRelationsOrdersProduct() {
+        return relationsOrdersProduct;
     }
 
-    public void setRelacionamentOrdersProduct(List<RelacionamentOrdersProduct> relacionamentOrdersProduct) {
-        this.relacionamentOrdersProduct = relacionamentOrdersProduct;
+    public void setRelationsOrdersProduct(List<RelationsOrdersProduct> relationsOrdersProduct) {
+        this.relationsOrdersProduct = relationsOrdersProduct;
     }
 
     public double getValue() {

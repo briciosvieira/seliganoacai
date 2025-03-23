@@ -3,12 +3,12 @@ package com.seliganoacai.acai.service;
 import com.seliganoacai.acai.entity.Optional;
 import com.seliganoacai.acai.entity.Orders;
 import com.seliganoacai.acai.entity.Product;
-import com.seliganoacai.acai.entity.RelacionamentOrdersProduct;
+import com.seliganoacai.acai.entity.RelationsOrdersProduct;
 import com.seliganoacai.acai.repository.OrdersRepository;
-import com.seliganoacai.acai.repository.RelacionamentOrdersProductRepository;
+import com.seliganoacai.acai.repository.RelationsOrdersProductRepository;
 import com.seliganoacai.acai.utils.Utils;
 import com.seliganoacai.acai.webConfig.dto.createDto.OrdersCreateDto;
-import com.seliganoacai.acai.webConfig.dto.createDto.ProductQuantityDto;
+import com.seliganoacai.acai.webConfig.dto.createDto.RelationsOrderProductCreateDto;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +30,22 @@ public class OrdersService {
     private ProductService productService;
 
     @Autowired
-    private RelacionamentOrdersProductRepository relacionamentOrdersProductRepository;
+    private RelationsOrdersProductRepository relationsOrdersProductRepository;
 
 
     @Transactional
     public Orders create(OrdersCreateDto dto) {
 
         if (dto.getName() == null || dto.getName().isEmpty()) {
-            throw new IllegalArgumentException("O nome do pedido é obrigatório.");
+            throw new IllegalArgumentException("O seu nome é  obrigatório.");
         }
 
-        if (dto.getProducts() == null || dto.getProducts().isEmpty()) {
+        if (dto.getRelationsOrderProductCreateDtos() == null || dto.getRelationsOrderProductCreateDtos().isEmpty()) {
             throw new IllegalArgumentException("O pedido deve conter pelo menos um produto.");
         }
 
         if (dto.getOptionals() == null) {
-            throw new IllegalArgumentException("A lista de opcionais não pode ser nula.");
+            throw new IllegalArgumentException("A lista de opcionais não pode estar em branco.");
         }
 
         Orders newOrders = new Orders();
@@ -55,25 +55,27 @@ public class OrdersService {
 
 
         List<Product> products = productService.findByIds(
-                dto.getProducts().stream()
-                        .map(ProductQuantityDto::getId)
+                dto.getRelationsOrderProductCreateDtos().stream()
+                        .map(RelationsOrderProductCreateDto::getId)
                         .collect(Collectors.toList())
         );
-        if (products.isEmpty() || products.size() != dto.getProducts().size()) {
+        if (products.isEmpty() || products.size() != dto.getRelationsOrderProductCreateDtos().size()) {
             throw new EntityNotFoundException("Produtos não foram encontrados.");
         }
 
 
-        List<RelacionamentOrdersProduct> relacionamentOrdersProducts = new ArrayList<>();
-        for (ProductQuantityDto productDto : dto.getProducts()) {
+        List<RelationsOrdersProduct> relationsOrdersProducts = new ArrayList<>();
+        for (RelationsOrderProductCreateDto relationsDto : dto.getRelationsOrderProductCreateDtos()) {
+
             Product product = products.stream()
-                    .filter(p -> p.getId().equals(productDto.getId()))
+                    .filter(filter -> filter.getId().equals(relationsDto.getId()))
                     .findFirst()
                     .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado."));
 
-            int quantity = productDto.getQuantity(); // Quantidade fornecida no DTO
-            RelacionamentOrdersProduct relacionament = new RelacionamentOrdersProduct(newOrders, product, quantity);
-            relacionamentOrdersProducts.add(relacionament);
+            int quantityProduct = relationsDto.getQuantity(); // Quantidade fornecida no DTO
+
+            RelationsOrdersProduct relacionament = new RelationsOrdersProduct(newOrders, product, quantityProduct);
+            relationsOrdersProducts.add(relacionament);
         }
 
         List<Optional> optionals = new ArrayList<>();
@@ -84,7 +86,7 @@ public class OrdersService {
             }
         }
 
-        newOrders.setRelacionamentOrdersProducts(relacionamentOrdersProducts);
+        newOrders.setRelationsOrdersProducts(relationsOrdersProducts);
         newOrders.setOpcionals(optionals);
 
 
@@ -93,7 +95,7 @@ public class OrdersService {
 
 
         newOrders = repository.save(newOrders);
-        relacionamentOrdersProductRepository.saveAll(relacionamentOrdersProducts);
+        relationsOrdersProductRepository.saveAll(relationsOrdersProducts);
 
         return newOrders;
     }

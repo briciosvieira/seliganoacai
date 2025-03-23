@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class RelacionamentOrdersProduct implements Serializable {
+public class RelationsOrdersProduct implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class RelacionamentOrdersProduct implements Serializable {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    public RelacionamentOrdersProduct() {
+    public RelationsOrdersProduct() {
     }
 
-    public RelacionamentOrdersProduct(Orders orders, Product product, int quantity){
+    public RelationsOrdersProduct(Orders orders, Product product, int quantity){
         this.order = orders;
         this.product = product;
         this.quantity = quantity;
@@ -36,7 +36,7 @@ public class RelacionamentOrdersProduct implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RelacionamentOrdersProduct that = (RelacionamentOrdersProduct) o;
+        RelationsOrdersProduct that = (RelationsOrdersProduct) o;
         return Objects.equals(id, that.id);
     }
 

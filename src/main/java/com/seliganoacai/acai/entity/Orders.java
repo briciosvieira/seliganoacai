@@ -23,7 +23,7 @@ public class Orders implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String numberOrder;
 
     @Column(nullable = false)
@@ -36,11 +36,11 @@ public class Orders implements Serializable {
     private List<Optional> opcionals = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RelacionamentOrdersProduct> relacionamentOrdersProducts = new ArrayList<>();
+    private List<RelationsOrdersProduct> relationsOrdersProducts = new ArrayList<>();
 
 
     public double calculateTotalValue() {
-        this.totalValue = relacionamentOrdersProducts.stream()
+        this.totalValue = relationsOrdersProducts.stream()
                 .mapToDouble(x -> x.getProduct().getValue() * x.getQuantity())
                 .sum();
         return this.totalValue;
@@ -67,12 +67,12 @@ public class Orders implements Serializable {
         this.name = name;
     }
 
-    public List<RelacionamentOrdersProduct> getRelacionamentOrdersProducts() {
-        return relacionamentOrdersProducts;
+    public List<RelationsOrdersProduct> getRelationsOrdersProducts() {
+        return relationsOrdersProducts;
     }
 
-    public void setRelacionamentOrdersProducts(List<RelacionamentOrdersProduct> relacionamentOrdersProducts) {
-        this.relacionamentOrdersProducts = relacionamentOrdersProducts;
+    public void setRelationsOrdersProducts(List<RelationsOrdersProduct> relationsOrdersProducts) {
+        this.relationsOrdersProducts = relationsOrdersProducts;
     }
 
     public List<Optional> getOpcionals() {

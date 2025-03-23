@@ -9,7 +9,7 @@ public class OrdersResponseDto {
     private String numberOrder;
     private String name;
     private double totalValue;
-    private List<RelacionamentOrdersProductResponseDto> relacionamentOrdersProducts;
+    private List<RelationsOrdersProductResponseDto> relacionamentOrdersProducts;
     private List<OptionalResponseDto> opcionals;
 
 
@@ -37,11 +37,11 @@ public class OrdersResponseDto {
         this.totalValue = totalValue;
     }
 
-    public List<RelacionamentOrdersProductResponseDto> getRelacionamentOrdersProducts() {
+    public List<RelationsOrdersProductResponseDto> getRelacionamentOrdersProducts() {
         return relacionamentOrdersProducts;
     }
 
-    public void setRelacionamentOrdersProducts(List<RelacionamentOrdersProductResponseDto> relacionamentOrdersProducts) {
+    public void setRelacionamentOrdersProducts(List<RelationsOrdersProductResponseDto> relacionamentOrdersProducts) {
         this.relacionamentOrdersProducts = relacionamentOrdersProducts;
     }
 

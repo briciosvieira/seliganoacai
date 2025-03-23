@@ -5,7 +5,7 @@ import com.seliganoacai.acai.webConfig.dto.createDto.OrdersCreateDto;
 import com.seliganoacai.acai.webConfig.dto.responseDto.OptionalResponseDto;
 import com.seliganoacai.acai.webConfig.dto.responseDto.OrdersResponseDto;
 import com.seliganoacai.acai.webConfig.dto.responseDto.ProductResponseDto;
-import com.seliganoacai.acai.webConfig.dto.responseDto.RelacionamentOrdersProductResponseDto;
+import com.seliganoacai.acai.webConfig.dto.responseDto.RelationsOrdersProductResponseDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,22 +25,22 @@ public class OrderMapper {
         dto.setTotalValue(orders.getTotalValue());
 
         // Mapeia os relacionamentos (produtos)
-        List<RelacionamentOrdersProductResponseDto> relacionamentDtos = orders.getRelacionamentOrdersProducts().stream()
-                .map(relacionament -> {
-                    RelacionamentOrdersProductResponseDto relacionamentDto = new RelacionamentOrdersProductResponseDto();
-                    relacionamentDto.setId(relacionament.getId());
-                    relacionamentDto.setQuantity(relacionament.getQuantity());
+        List<RelationsOrdersProductResponseDto> listRelationsDtos = orders.getRelationsOrdersProducts().stream()
+                .map(filterRelations -> {
+                    RelationsOrdersProductResponseDto relationsDto = new RelationsOrdersProductResponseDto();
+                    relationsDto.setId(filterRelations.getId());
+                    relationsDto.setQuantity(filterRelations.getQuantity());
 
                     // Mapeia o produto
                     ProductResponseDto productDto = new ProductResponseDto();
-                    productDto.setDescription(relacionament.getProduct().getDescription());
-                    productDto.setValue(relacionament.getProduct().getValue());
-                    relacionamentDto.setProduct(productDto);
+                    productDto.setDescription(filterRelations.getProduct().getDescription());
+                    productDto.setValue(filterRelations.getProduct().getValue());
+                    relationsDto.setProduct(productDto);
 
-                    return relacionamentDto;
+                    return relationsDto;
                 })
                 .collect(Collectors.toList());
-        dto.setRelacionamentOrdersProducts(relacionamentDtos);
+        dto.setRelacionamentOrdersProducts(listRelationsDtos);
 
         // Mapeia os opcionais
         List<OptionalResponseDto> optionalDtos = orders.getOpcionals().stream()

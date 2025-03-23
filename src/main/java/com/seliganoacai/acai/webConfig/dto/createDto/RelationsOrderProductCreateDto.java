@@ -5,10 +5,12 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductQuantityDto {
+public class RelationsOrderProductCreateDto {
+
     private Long id;
     private int quantity;
 
+    // G And S
     public Long getId() {
         return id;
     }

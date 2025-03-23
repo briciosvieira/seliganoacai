@@ -13,27 +13,35 @@ public class OrdersCreateDto {
     @NotBlank(message = "O cliente deve informar o nome")
     private String name;
 
+    /*
+    Uma pergunta que eu vou me fazer no futuro, porque não colocar Long pra buscar o ID, eu não coloquei long
+    porque na hora de colocar a quantidade não iria inserir no banco e não coloquei separado porque não funcionaria,
+    porque a variavel quantity  é da classe RelationsOerderProduct, então criei um dto que tem long e tem quantidade
+    que e assim eu consigo substituir a lista de long colocando o dto, podendo inserir o id do item e também podendo inserir
+    a quantidade do produto.
+    */
+
     @NotEmpty(message = "A lista de produtos não pode estar vazia")
-    private List<ProductQuantityDto> products; // IDs dos produtos
+    private List<RelationsOrderProductCreateDto> relationsOrderProductCreateDtos;
 
     @NotEmpty(message = "A lista de opcionais não pode estar vazia")
-    private List<Long> optionals; // IDs dos opcionais
+    private List<Long> optionals;
 
 
     public String getName() {
         return name;
     }
 
-    public void setName(@Size(min = 3, max = 40, message = "O nome deve ter entre 3 e 40 caracteres") @NotBlank(message = "O cliente deve informar o nome") String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public @NotEmpty(message = "A lista de produtos não pode estar vazia") List<ProductQuantityDto> getProducts() {
-        return products;
+    public  List<RelationsOrderProductCreateDto> getRelationsOrderProductCreateDtos() {
+        return relationsOrderProductCreateDtos;
     }
 
-    public void setProducts(@NotEmpty(message = "A lista de produtos não pode estar vazia") List<ProductQuantityDto> products) {
-        this.products = products;
+    public void setRelationsOrderProductCreateDtos(List<RelationsOrderProductCreateDto> relationsOrderProductCreateDtos) {
+        this.relationsOrderProductCreateDtos = relationsOrderProductCreateDtos;
     }
 
     public List<Long> getOptionals() {

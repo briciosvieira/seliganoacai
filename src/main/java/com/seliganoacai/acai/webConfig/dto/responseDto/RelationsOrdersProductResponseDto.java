@@ -1,6 +1,6 @@
 package com.seliganoacai.acai.webConfig.dto.responseDto;
 
-public class RelacionamentOrdersProductResponseDto {
+public class RelationsOrdersProductResponseDto {
 
     private Long id;
     private ProductResponseDto product;
