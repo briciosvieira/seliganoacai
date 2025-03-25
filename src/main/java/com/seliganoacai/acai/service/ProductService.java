@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -67,17 +66,21 @@ public class ProductService {
     }
 
     @Transactional
-    public Product update(Long id,  String name, int quantity) {
+    public Product update(Long id, ProductCreateDto dto) throws IOException {
 
-        try {
+        try{
+        Product product = findById(id);
+        product.setDescription(dto.getDescription());
+        product.setValue(dto.getValue());
 
-        Product product;
-        product = findById(id);
-        product.setDescription(name);
+        if ( dto.getImageUrl() !=null && !dto.getImageUrl().isEmpty()){
+            String imageUrl = firebaseService.upload(dto.getImageUrl(), dto.getImageUrl().getOriginalFilename());
+            product.setImageUrl(imageUrl);
+        }
         return repository.save(product);
 
         } catch (RuntimeException e) {
-            throw new EntityNotFoundException("Não foi possível editar o produto, tente novamente ou contact o Administrador.");
+            throw new EntityNotFoundException("Produto não encontrado, tente");
         }
     }
 

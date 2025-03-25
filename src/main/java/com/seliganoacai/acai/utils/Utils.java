@@ -1,5 +1,8 @@
 package com.seliganoacai.acai.utils;
 
+import com.seliganoacai.acai.entity.RelationsOrdersProduct;
+
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -16,5 +19,11 @@ public class Utils {
         }
 
         return result.toString();
+    }
+
+    public static double calculateTotalValue(List<RelationsOrdersProduct> items) {
+        return items.stream()
+                .mapToDouble(map -> map.getProduct().getValue() * map.getQuantity())
+                .sum();
     }
 }

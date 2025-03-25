@@ -38,14 +38,6 @@ public class Orders implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RelationsOrdersProduct> relationsOrdersProducts = new ArrayList<>();
 
-
-    public double calculateTotalValue() {
-        this.totalValue = relationsOrdersProducts.stream()
-                .mapToDouble(x -> x.getProduct().getValue() * x.getQuantity())
-                .sum();
-        return this.totalValue;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

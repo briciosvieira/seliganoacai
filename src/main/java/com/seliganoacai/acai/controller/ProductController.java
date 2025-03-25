@@ -55,10 +55,20 @@ public class ProductController {
         return ResponseEntity.ok(PageableMapper.toDto(product));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> update( @PathVariable Long id, @Valid @RequestBody ProductUpdateDto dto){
-        Product product = service.update(id, dto.getName(), dto.getQuantity());
-        return ResponseEntity.ok(ProductMapper.entityToResponseDto(product));
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProductResponseDto> update( @PathVariable Long id,
+                                                      @RequestParam("description") String description,
+                                                      @RequestParam("value") double value,
+                                                      @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
+
+
+        ProductCreateDto dto = new ProductCreateDto();
+        dto.setDescription(description);
+        dto.setValue(value);
+        dto.setImageUrl(image);
+
+        Product updatedProduct = service.update(id, dto);
+        return ResponseEntity.ok(ProductMapper.entityToResponseDto(updatedProduct));
     }
 
     @DeleteMapping("/{id}")

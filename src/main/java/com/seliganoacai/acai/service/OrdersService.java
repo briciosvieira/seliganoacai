@@ -42,6 +42,7 @@ public class OrdersService {
 
         if (dto.getRelationsOrderProductCreateDtos() == null || dto.getRelationsOrderProductCreateDtos().isEmpty()) {
             throw new IllegalArgumentException("O pedido deve conter pelo menos um produto.");
+
         }
 
         if (dto.getOptionals() == null) {
@@ -88,11 +89,8 @@ public class OrdersService {
 
         newOrders.setRelationsOrdersProducts(relationsOrdersProducts);
         newOrders.setOpcionals(optionals);
-
-
-        double totalValue = newOrders.calculateTotalValue();
+        double totalValue = Utils.calculateTotalValue(relationsOrdersProducts);
         newOrders.setTotalValue(totalValue);
-
 
         newOrders = repository.save(newOrders);
         relationsOrdersProductRepository.saveAll(relationsOrdersProducts);
